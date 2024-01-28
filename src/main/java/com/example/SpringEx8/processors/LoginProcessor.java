@@ -1,5 +1,6 @@
 package com.example.SpringEx8.processors;
 
+import com.example.SpringEx8.services.LoggedUserManagementService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -9,9 +10,15 @@ public class LoginProcessor {
 
     private String username;
     private String password;
+    private LoggedUserManagementService loggedUserManagementService;
+
+    public LoginProcessor(LoggedUserManagementService loggedUserManagementService) {
+        this.loggedUserManagementService = loggedUserManagementService;
+    }
 
     public boolean login() {
         if (username.equals("natalie") && password.equals("password")) {
+            loggedUserManagementService.setUsername(username);
             return true;
         }
 

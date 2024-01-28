@@ -1,6 +1,7 @@
 package com.example.SpringEx8.controllers;
 
 import com.example.SpringEx8.processors.LoginProcessor;
+import com.example.SpringEx8.services.LoggedUserManagementService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class LoginController {
     private Logger logger = Logger.getLogger(LoginController.class.getName());
     private final LoginProcessor loginProcessor;
 
-    public LoginController(LoginProcessor loginProcessor) {
+    public LoginController(LoginProcessor loginProcessor){
         this.loginProcessor = loginProcessor;
     }
 
@@ -32,8 +33,7 @@ public class LoginController {
         loginProcessor.setPassword(password);
 
         if (loginProcessor.login())  {
-            model.addAttribute("message", "You are now logged in");
-            return "login.html";
+            return "redirect:/main";
         }
 
         model.addAttribute("message", "Login failed");
